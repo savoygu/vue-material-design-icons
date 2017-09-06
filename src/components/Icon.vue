@@ -158,7 +158,7 @@
     icons
   }
 </script>
-<style lang="less" rel="stylesheet/less">
+<style>
   .md-icon {
     display: inline-block;
     fill: currentColor;
