@@ -71,7 +71,7 @@
         return {
           'md-icon': true,
           'md-spin': this.spin,
-          'md-reverse': this.reverse,
+          'md-inverse': this.inverse,
           'md-pulse': this.pulse,
           'md-flip-normal': this.flip === 'normal',
           'md-flip-horizontal': this.flip === 'horizontal',
@@ -175,10 +175,10 @@
   .md-spin {
     animation: md-spin 1s 0s infinite linear;
   }
-  .md-reverse {
+  .md-inverse {
     color: #fff;
   }
-  .md-pluse {
+  .md-pulse {
     animation: md-spin 1s infinite steps(8);
   }
   @keyframes md-spin {
