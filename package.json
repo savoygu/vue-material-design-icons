@@ -1,7 +1,7 @@
 {
   "name": "vue-md-icons",
   "description": "Created by google's material-design-icons with Vue 2.x inspired(cp? chaoxi? yeah, whatever.) by @Justineo vue-awesome",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "savoygu@gmail.com",
   "main": "lib/vue-md-icons.js",
   "files": [
