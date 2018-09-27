@@ -1,44 +1,53 @@
-/**
- * 复制 material-design-icons 下所有 svg 图标
- * 在执行之前，确保与你项目同级目录下有 material-design-icons 目录
- */
-// var mdicons = require('material-design-icons')
-// console.log(mdicons)
-var rd = require('rd')
-var path = require('path')
-var fs = require('fs')
-var cp = require('cp')
-var nodeCp = require('node-cp')
-var ICON_CATEGORIES = [
-  'action',
-  'alert',
-  'av',
-  'communication',
-  'content',
-  'device',
-  'editor',
-  'file',
-  'hardware',
-  'image',
-  'maps',
-  'navigation',
-  'notification',
-  'places',
-  'social',
-  'toggle',
-]
+const fs = require('fs')
+const path = require('path')
+const rd = require('rd')
+const nodeCp = require('node-cp')
+const mkdirp = require('mkdirp')
+const materialDesignIcons = require('../submodule/material-design-icons')
 
-for (var i = 0, len = ICON_CATEGORIES.length; i < len; i++) {
-	var iconCategory = ICON_CATEGORIES[i]
-	var svgCategories = ['design', 'production'] // svg 图标分为 设计和生产（压缩）
-	svgCategories.forEach(function (svgCategory) {
-		var svgCategoryDir = `../../material-design-icons/${iconCategory}/svg/${svgCategory}` // 图标分类下的 设计和生产目录
-		rd.readFileSync(path.join(__dirname, svgCategoryDir)).forEach(function (srcFile) { // 读取 设计和生产 目录下所有图标
-			var size = srcFile.match(/\w+(\d{2}).*/) // 图标名称 和 大小
-      var distFile =  path.join(__dirname, `../assets/svg/${svgCategory}/${size[1]}px/${size[0]}`) // 目标目录
-      cp(srcFile, distFile, function () {})
-      // cp.sync(srcFile, distFile) // 同步 复制
-      // nodeCp(srcFile, distFile, function (err, files) { console.log(srcFile, distFile, files) })
-		})
-	})
+const MATERIAL_DESIGN_ICONS_PATH =  materialDesignIcons.STATIC_PATH
+const MATERIAL_DESIGN_ICONS_TYPES = ['design', 'production']
+const MATERIAL_DESIGN_ICONS_EXCLUDES = ['iconfont', 'sprites']
+
+const walk = (dir, done) => {
+  let results = []
+  fs.readdir(dir, (err, list) => {
+    if (err) return done(err)
+
+    list.forEach((fileName) => {
+      const file = path.resolve(dir, fileName)
+      const stat = fs.statSync(file)
+      if (stat && stat.isDirectory()) {
+        results.push(fileName)
+      }
+    })
+
+    results = results.filter(v => MATERIAL_DESIGN_ICONS_EXCLUDES.indexOf(v) === -1)
+    return done(null, results)
+  })
 }
+
+walk(MATERIAL_DESIGN_ICONS_PATH, (err, results) => {
+  if (err) throw err
+
+  for (let i = 0, length = results.length; i < length; i++) {
+    const category = results[i]
+    const types = MATERIAL_DESIGN_ICONS_TYPES // svg 图标分为 设计和生产（压缩）
+
+    types.forEach(function (type) {
+      const typeDir = path.resolve(MATERIAL_DESIGN_ICONS_PATH, `${category}/svg/${type}`) // 图标分类下的 设计和生产目录
+      rd.readFileSync(typeDir).forEach(function (iconFilesSource) { // 读取 设计和生产 目录下所有图标
+        const [fileName, iconSize] = iconFilesSource.match(/\w+(\d{2}).*/) // 图标名称 和 大小
+        const iconFilesDest = path.join(__dirname, `../assets/svg/${type}/${iconSize}px`) // 目标目录
+        if (!fs.existsSync(iconFilesDest)) {
+          mkdirp.sync(iconFilesDest)
+        }
+        nodeCp(iconFilesSource, iconFilesDest, function (err, list) {
+          if (err) console.log(err)
+          console.log(`复制 ${category} - ${iconSize} - ${fileName} 完成`)
+        })
+      })
+    })
+  }
+
+})
