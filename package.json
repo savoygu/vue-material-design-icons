@@ -37,7 +37,8 @@
     "url": "https://github.com/savoygu/vue-material-design-icons/issues"
   },
   "unpkg": "lib/icons.js",
-  "dependencies": {
+  "dependencies": {},
+  "peerDependencies": {
     "vue": "^2.3.3"
   },
   "devDependencies": {

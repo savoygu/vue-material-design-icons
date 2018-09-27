@@ -7,7 +7,7 @@
 ### NPM
 
 ```bash
-npm install vue-material-design-icons
+npm install @savoygu/vue-material-design-icons
 ```
 
 ### manual
