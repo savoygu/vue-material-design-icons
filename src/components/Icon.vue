@@ -69,13 +69,13 @@
       },
       clazz () {
         return {
-          'md-icon': true,
-          'md-spin': this.spin,
-          'md-inverse': this.inverse,
-          'md-pulse': this.pulse,
-          'md-flip-normal': this.flip === 'normal',
-          'md-flip-horizontal': this.flip === 'horizontal',
-          'md-flip-vertical': this.flip === 'vertical'
+          'material-design-icon': true,
+          'material-design-spin': this.spin,
+          'material-design-inverse': this.inverse,
+          'material-design-pulse': this.pulse,
+          'material-design-flip-normal': this.flip === 'normal',
+          'material-design-flip-horizontal': this.flip === 'horizontal',
+          'material-design-flip-vertical': this.flip === 'vertical'
         }
       },
       icon () {
@@ -159,29 +159,29 @@
   }
 </script>
 <style>
-  .md-icon {
+  .material-design-icon {
     display: inline-block;
     fill: currentColor;
   }
-  .md-flip-normal {
+  .material-design-flip-normal {
     transform: scale(1);
   }
-  .md-flip-horizontal {
+  .material-design-flip-horizontal {
     transform: scale(-1, 1)
   }
-  .md-flip-vertical {
+  .material-design-flip-vertical {
     transform: scale(1, -1)
   }
-  .md-spin {
-    animation: md-spin 1s 0s infinite linear;
+  .material-design-spin {
+    animation: material-design-spin 1s 0s infinite linear;
   }
-  .md-inverse {
+  .material-design-inverse {
     color: #fff;
   }
-  .md-pulse {
-    animation: md-spin 1s infinite steps(8);
+  .material-design-pulse {
+    animation: material-design-spin 1s infinite steps(8);
   }
-  @keyframes md-spin {
+  @keyframes material-design-spin {
     0% {
       transform: rotate(0deg);
     }

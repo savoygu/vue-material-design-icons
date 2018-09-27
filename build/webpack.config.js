@@ -6,8 +6,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, '..', './lib'),
-    filename: 'vue-md-icons.js',
-    library: 'VueMdIcons',
+    filename: 'icons.js',
+    library: 'VueMaterialDesignIcons',
     libraryTarget: 'umd'
   },
   externals: {
@@ -96,7 +96,7 @@ module.exports = {
     })
     // ,
     // new ExtractTextPlugin({
-    //   filename: '../lib/vue-md-icons.css',
+    //   filename: '../lib/vue-material-design-icons.css',
     //   allChunks: true
     // })
   ]

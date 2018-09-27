@@ -3,7 +3,7 @@
     <div id="logo" @mouseenter="toggle" @mouseleave="toggle" @click="change" :title="logo">
       <icon :name="logo" scale="4"></icon>
     </div>
-    <h1><a href="https://github.com/savoygu/vue-md-icons">Vue-Md-Icons</a></h1>
+    <h1><a href="https://github.com/savoygu/vue-material-design-icons">Vue-Material-Design-Icons</a></h1>
     <demonstration
         tag="h2"
         :show-content="false"

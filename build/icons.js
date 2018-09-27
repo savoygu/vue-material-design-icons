@@ -1,14 +1,14 @@
-var path = require('path')
-var fs = require('fs')
-var icons = require('../assets/icons.json')
+const path = require('path')
+const fs = require('fs')
+const icons = require('../assets/icons.json')
 
-var moduleTpl = fs.readFileSync(path.join(__dirname, './icon.tpl'), 'utf8')
-var ICON_PATH = path.join(__dirname, '../src/icons')
+const moduleTpl = fs.readFileSync(path.join(__dirname, './icon.tpl'), 'utf8')
+const ICON_PATH = path.join(__dirname, '../src/icons')
 
-var indexModule = ''
-var names = Object.keys(icons)
+let indexModule = ''
+const names = Object.keys(icons)
 names.forEach(function (name) {
-  var icon = {}
+  const icon = {}
   icon[name] = icons[name]
   fs.writeFileSync(`${ICON_PATH}/${name}.js`, moduleTpl.replace('${icon}', JSON.stringify(icon)))
   indexModule += `import './${name}'\n`
